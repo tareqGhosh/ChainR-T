@@ -10,6 +10,7 @@ db.authenticate().then(() => console.log('database connected')).catch(e => conso
 app.get('/', (req, res) => res.json({ data: 'Hello world' }));
 
 app.use('/api/users', jsonParser, require('./routes/users'));
+app.use('/api/blogs', jsonParser, require('./routes/blogs'));
 
 app.listen(port, () => {
     console.log(`Your server is running on port ${port}`);

@@ -10,18 +10,22 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-        Blog.belongsTo(models.country, {
-            foreignKey: { name: 'user_id', allowNull: false }
-        });
+    //   Blog.belongsTo(Model.User, {
+    //     foreignKey: { name: 'user_id', allowNull: false }
+    // });
     }
   }
   Blog.init({
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
-    user_id: {type: DataTypes.INTEGER},
+    user_id: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Blog',
+    tableName: 'blogs'
   });
+  Blog.associate = function(models) {
+    Blog.belongsTo(models.User, {foreignKey: 'user_id', as: 'user'})
+  };
   return Blog;
 };
